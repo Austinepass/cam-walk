@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/authFragment">
+
+    <fragment
+        android:id="@+id/authFragment"
+        android:name="com.orgustine.camapp.ui.AuthFragment"
+        android:label="fragment_auth"
+        tools:layout="@layout/fragment_auth" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.orgustine.camapp.ui.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+<!--    <fragment-->
+<!--        android:id="@+id/projectsFragment"-->
+<!--        android:name="com.orgustine.camapp.ui.home.ProjectsFragment"-->
+<!--        android:label="fragment_projects"-->
+<!--        tools:layout="@layout/fragment_projects" />-->
+<!--    <fragment-->
+<!--        android:id="@+id/settingsFragment"-->
+<!--        android:name="com.orgustine.camapp.ui.home.SettingsFragment"-->
+<!--        android:label="fragment_settings"-->
+<!--        tools:layout="@layout/fragment_settings" />-->
+<!--    <fragment-->
+<!--        android:id="@+id/helpFragment"-->
+<!--        android:name="com.orgustine.camapp.ui.home.HelpFragment"-->
+<!--        android:label="fragment_help"-->
+<!--        tools:layout="@layout/fragment_help" />-->
+<!--    <fragment-->
+<!--        android:id="@+id/feedbackFragment"-->
+<!--        android:name="com.orgustine.camapp.ui.home.FeedbackFragment"-->
+<!--        android:label="fragment_feedback"-->
+<!--        tools:layout="@layout/fragment_feedback" />-->
+</navigation>

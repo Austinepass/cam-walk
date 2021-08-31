@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.FeedbackFragment">
+
+    <TextView
+        android:id="@+id/feedback_title"
+        android:layout_marginTop="36dp"
+        android:layout_marginLeft="10dp"
+        android:text="@string/feedback_title_msg"
+        android:textSize="12sp"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/feedback_et"
+        android:hint="@string/feedback"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@id/feedback_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/submit_btn"
+        android:text="Submit"
+        android:layout_margin="8dp"
+        android:textAllCaps="false"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>

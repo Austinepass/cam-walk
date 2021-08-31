@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_nav_graph"
+    app:startDestination="@id/projectsFragment">
+
+    <fragment
+        android:id="@+id/projectsFragment"
+        android:name="com.orgustine.camapp.ui.home.ProjectsFragment"
+        android:label="Projects"
+        tools:layout="@layout/fragment_projects" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.orgustine.camapp.ui.home.SettingsFragment"
+        android:label="Settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/helpFragment"
+        android:name="com.orgustine.camapp.ui.home.HelpFragment"
+        android:label="Help"
+        tools:layout="@layout/fragment_help" />
+    <fragment
+        android:id="@+id/feedbackFragment"
+        android:name="com.orgustine.camapp.ui.home.FeedbackFragment"
+        android:label="@string/feedback"
+        tools:layout="@layout/fragment_feedback" />
+</navigation>

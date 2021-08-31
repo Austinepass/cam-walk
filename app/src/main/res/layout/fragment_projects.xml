@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.home.ProjectsFragment">
+
+    <TextView
+        android:id="@+id/popular_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ON THIS DEVICE"
+        android:textSize="22sp"
+        android:layout_margin="8dp"
+        android:textAllCaps="true"
+        />
+
+    <View
+        android:id="@+id/on_device_border"
+        android:layout_marginVertical="8dp"
+        android:layout_below="@id/popular_txt"
+        android:background="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/on_device_list"
+        android:layout_below="@id/on_device_border"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/on_cloud_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/on_device_list"
+        android:text="IN THE CLOUD"
+        android:textSize="22sp"
+        android:layout_margin="8dp"
+        android:textAllCaps="true"
+        />
+
+    <View
+        android:id="@+id/on_cloud_border"
+        android:layout_marginVertical="8dp"
+        android:layout_below="@id/on_cloud_txt"
+        android:background="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/on_cloud_list"
+        android:layout_below="@id/on_cloud_border"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/create_project_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@drawable/add_btn"
+        app:tint="@color/white"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        />
+
+
+</RelativeLayout>
