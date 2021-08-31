@@ -4,6 +4,8 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        maven { url 'https://jitpack.io' }
+
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.2.0-beta06"
@@ -21,6 +23,14 @@ allprojects {
         google()
         mavenCentral()
         jcenter() // Warning: this repository is going to shut down soon
+        maven { url 'https://jitpack.io' }
+        maven {
+            url 'http://nexus.arashivision.com:9999/repository/maven-public/'
+            credentials {
+                username = 'deployment'
+                password = 'test123'
+            }
+        }
     }
 }
 
