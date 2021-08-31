@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.orgustine.camapp">
 
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,13 +13,60 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CamApp">
-        <activity android:name=".MainActivity">
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".MainActivity">
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"
+                android:resource="@xml/device_filter" />
         </activity>
+        <activity
+            android:name=".activity.FullDemoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PreviewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.Preview2Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.Preview3Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.LiveActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CaptureActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.OscActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CameraFilesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PlayAndExportActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MoreSettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.StitchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FwUpgradeActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
