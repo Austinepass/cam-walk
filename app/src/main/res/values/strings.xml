@@ -250,4 +250,6 @@
     <string name="fw_upgrade_cancel">Upload cancelled</string>
     <string name="fw_upgrade_progress">Upload progress: %s</string>
     <string name="fw_toast_choose_file">Please select the firmware file to upload first</string>
+    <string name="on_this_device">ON THIS DEVICE</string>
+    <string name="in_the_cloud">IN THE CLOUD</string>
 </resources>
