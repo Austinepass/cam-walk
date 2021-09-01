@@ -31,9 +31,10 @@
 
     <TextView
         android:id="@+id/synced"
-        android:text="Last synced"
+        android:text="Last synced on Monday"
         android:layout_toRightOf="@id/download_icon"
         android:layout_below="@id/title"
+        android:textSize="12sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

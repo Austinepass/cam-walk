@@ -2,12 +2,17 @@ package com.orgustine.camapp.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.widget.PopupMenu
+import androidx.annotation.MenuRes
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.orgustine.camapp.R
 import com.orgustine.camapp.activity.MainActivity
 import com.orgustine.camapp.data.ProjectAdapter
@@ -58,7 +63,40 @@ class ProjectsFragment : Fragment(R.layout.fragment_projects), OnItemClickListen
     }
 
     override fun onItemClick(id: Int) {
-        TODO("Not yet implemented")
+        Log.i("Root", "Root clicked")
+    }
+
+    override fun onMoreClick(v: View) {
+        showMenu(v, R.menu.project_list_menu)
+    }
+
+    private fun showMenu(v: View, @MenuRes menuRes: Int) {
+        val popup = PopupMenu(requireContext(), v)
+        popup.menuInflater.inflate(menuRes, popup.menu)
+
+        popup.setOnMenuItemClickListener { menuItem: MenuItem ->
+            // Respond to menu item click.
+            when (menuItem.itemId) {
+                R.id.capture -> {
+                    startActivity(Intent(requireActivity(), MainActivity::class.java))
+                    true
+                }
+                R.id.delete -> {
+                    Snackbar.make(requireView(), "Deleting Project...", Snackbar.LENGTH_SHORT).show()
+                    true
+                }
+                else -> {
+                    val navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
+                    navController.navigate(R.id.detailsFragment)
+                    true
+                }
+            }
+        }
+//        popup.setOnDismissListener {
+//            // Respond to popup being dismissed.
+//        }
+        // Show the popup menu.
+        popup.show()
     }
 
 }

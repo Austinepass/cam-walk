@@ -1,6 +1,7 @@
 package com.orgustine.camapp.data
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -22,6 +23,9 @@ class ProjectAdapter(private val listener: OnItemClickListener, private val devi
 //                Glide.with(binding.root.context)
 //                    .load(newsResult.media[0].mediaMetadata[2].url)
 //                    .into(image)
+                moreIcon.setOnClickListener {  v ->
+                    listener.onMoreClick(v)
+                }
                 root.setOnClickListener {
                     if (adapterPosition != RecyclerView.NO_POSITION) {
                         listener.onItemClick(adapterPosition)
@@ -44,6 +48,7 @@ class ProjectAdapter(private val listener: OnItemClickListener, private val devi
 
     interface OnItemClickListener {
         fun onItemClick(id: Int)
+        fun onMoreClick(v: View)
     }
 
     class DiffCallback : DiffUtil.ItemCallback<Project>() {
