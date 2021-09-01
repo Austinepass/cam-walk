@@ -1,10 +1,6 @@
 package com.orgustine.camapp.activity;
 
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.LifecycleRegistry;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -74,17 +70,11 @@ public class FullDemoActivity extends AppCompatActivity implements ICameraChange
     private int mCurPreviewType = -1;
     private PreviewStreamResolution mCurPreviewResolution = null;
 
-    private LifecycleRegistry mLifecycleRegistry;
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_full_demo);
-
-        mLifecycleRegistry = new LifecycleRegistry((LifecycleOwner) this);
-        mLifecycleRegistry.markState(Lifecycle.State.CREATED);
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         bindNormalViews();
@@ -98,18 +88,6 @@ public class FullDemoActivity extends AppCompatActivity implements ICameraChange
             onCameraStorageChanged(cameraManager.getCameraStorageFreeSpace(), cameraManager.getCameraStorageTotalSpace());
         }
         cameraManager.registerCameraChangedCallback(this);
-    }
-
-    @NotNull
-    public Lifecycle getArchLifecycle() {
-        return mLifecycleRegistry;
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mLifecycleRegistry.markState(Lifecycle.State.STARTED);
-
     }
 
     private void bindNormalViews() {
@@ -143,7 +121,7 @@ public class FullDemoActivity extends AppCompatActivity implements ICameraChange
         mTvSdBattery = findViewById(R.id.tv_battery_level);
         mTvRecordDuration = findViewById(R.id.tv_record_duration);
         mCapturePlayerView = findViewById(R.id.player_capture);
-        mCapturePlayerView.setLifecycle(getArchLifecycle());
+        mCapturePlayerView.setLifecycle(getLifecycle());
 
         mRgCaptureMode = findViewById(R.id.rg_capture_mode);
         mRgCaptureMode.setOnCheckedChangeListener((group, checkedId) -> {
@@ -475,16 +453,4 @@ public class FullDemoActivity extends AppCompatActivity implements ICameraChange
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        InstaCameraManager.getInstance().unregisterCameraChangedCallback(this);
-        mLifecycleRegistry.markState(Lifecycle.State.DESTROYED);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mLifecycleRegistry.markState(Lifecycle.State.RESUMED);
-    }
 }

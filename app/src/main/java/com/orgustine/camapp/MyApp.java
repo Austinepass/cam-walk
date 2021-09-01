@@ -2,8 +2,8 @@ package com.orgustine.camapp;
 
 import android.app.Application;
 
-import com.arashivision.sdk.demo.activity.StitchActivity;
-import com.arashivision.sdk.demo.util.AssetsUtil;
+import com.orgustine.camapp.activity.StitchActivity;
+import com.orgustine.camapp.util.AssetsUtil;
 import com.arashivision.sdkcamera.InstaCameraSDK;
 import com.arashivision.sdkmedia.InstaMediaSDK;
 

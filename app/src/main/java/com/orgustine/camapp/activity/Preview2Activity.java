@@ -1,8 +1,5 @@
 package com.orgustine.camapp.activity;
 
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.LifecycleRegistry;
 import android.os.Bundle;
 import android.view.SurfaceView;
 import android.view.ViewGroup;
@@ -35,16 +32,10 @@ public class Preview2Activity extends BaseObserveCameraActivity implements IPrev
     private ToggleButton mBtnPlayer;
     private SurfaceView mSurfaceView; // Just for custom surface
 
-    private LifecycleRegistry mLifecycleRegistry;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preview2);
-
-        mLifecycleRegistry = new LifecycleRegistry((LifecycleOwner) this);
-        mLifecycleRegistry.markState(Lifecycle.State.CREATED);
-
         setTitle(R.string.preview2_toolbar_title);
         bindViews();
 
@@ -52,15 +43,10 @@ public class Preview2Activity extends BaseObserveCameraActivity implements IPrev
         InstaCameraManager.getInstance().startPreviewStream();
     }
 
-    @NotNull
-    public Lifecycle getArchLifecycle() {
-        return mLifecycleRegistry;
-    }
-
     private void bindViews() {
         mLayoutSurfaceContainer = findViewById(R.id.layout_surface_container);
         mCapturePlayerView = findViewById(R.id.player_capture);
-        mCapturePlayerView.setLifecycle(getArchLifecycle());
+        mCapturePlayerView.setLifecycle(getLifecycle());
 
         mBtnPreview = findViewById(R.id.btn_preview);
         mBtnPreview.setOnClickListener(v -> {
@@ -162,24 +148,6 @@ public class Preview2Activity extends BaseObserveCameraActivity implements IPrev
         mBtnPlayer.setEnabled(false);
         mBtnPlayer.setChecked(false);
         mBtnPreview.setChecked(false);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mLifecycleRegistry.markState(Lifecycle.State.RESUMED);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mLifecycleRegistry.markState(Lifecycle.State.DESTROYED);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mLifecycleRegistry.markState(Lifecycle.State.STARTED);
     }
 
 }

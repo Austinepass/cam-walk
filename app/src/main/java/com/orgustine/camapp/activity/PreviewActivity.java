@@ -1,8 +1,5 @@
 package com.orgustine.camapp.activity;
 
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.LifecycleRegistry;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -17,7 +14,6 @@ import android.widget.ToggleButton;
 import androidx.annotation.Nullable;
 
 import com.arashivision.insta360.basecamera.camera.CameraType;
-import com.orgustine.camapp.R;
 import com.arashivision.sdkcamera.camera.InstaCameraManager;
 import com.arashivision.sdkcamera.camera.callback.IPreviewStatusListener;
 import com.arashivision.sdkcamera.camera.resolution.PreviewStreamResolution;
@@ -25,6 +21,7 @@ import com.arashivision.sdkmedia.player.capture.CaptureParamsBuilder;
 import com.arashivision.sdkmedia.player.capture.InstaCapturePlayerView;
 import com.arashivision.sdkmedia.player.config.InstaStabType;
 import com.arashivision.sdkmedia.player.listener.PlayerViewListener;
+import com.orgustine.camapp.R;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -42,16 +39,10 @@ public class PreviewActivity extends BaseObserveCameraActivity implements IPrevi
 
     private PreviewStreamResolution mCurrentResolution;
 
-    private LifecycleRegistry mLifecycleRegistry;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preview);
-
-        mLifecycleRegistry = new LifecycleRegistry((LifecycleOwner) this);
-        mLifecycleRegistry.markState(Lifecycle.State.CREATED);
-
         setTitle(R.string.preview_toolbar_title);
         bindViews();
 
@@ -63,15 +54,10 @@ public class PreviewActivity extends BaseObserveCameraActivity implements IPrevi
 //        InstaCameraManager.getInstance().startPreviewStream();
     }
 
-    @NotNull
-    public Lifecycle getArchLifecycle() {
-        return mLifecycleRegistry;
-    }
-
     private void bindViews() {
         mLayoutContent = findViewById(R.id.layout_content);
         mCapturePlayerView = findViewById(R.id.player_capture);
-        mCapturePlayerView.setLifecycle(getArchLifecycle());
+        mCapturePlayerView.setLifecycle(getLifecycle());
 
         mBtnSwitch = findViewById(R.id.btn_switch);
         mBtnSwitch.setOnClickListener(v -> {
@@ -268,24 +254,6 @@ public class PreviewActivity extends BaseObserveCameraActivity implements IPrevi
         // 预览开启失败
         // Preview Failed
         mBtnSwitch.setChecked(false);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mLifecycleRegistry.markState(Lifecycle.State.RESUMED);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mLifecycleRegistry.markState(Lifecycle.State.DESTROYED);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mLifecycleRegistry.markState(Lifecycle.State.STARTED);
     }
 
 }

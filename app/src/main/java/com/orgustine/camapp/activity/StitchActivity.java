@@ -1,8 +1,5 @@
 package com.orgustine.camapp.activity;
 
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.LifecycleRegistry;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.RadioGroup;
@@ -11,14 +8,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.orgustine.camapp.MyApp;
-import com.orgustine.camapp.R;
 import com.arashivision.sdkmedia.player.image.ImageParamsBuilder;
 import com.arashivision.sdkmedia.player.image.InstaImagePlayerView;
 import com.arashivision.sdkmedia.stitch.StitchUtils;
 import com.arashivision.sdkmedia.work.WorkWrapper;
-
-import org.jetbrains.annotations.NotNull;
+import com.orgustine.camapp.MyApp;
+import com.orgustine.camapp.R;
 
 import java.lang.ref.WeakReference;
 
@@ -36,16 +31,10 @@ public class StitchActivity extends AppCompatActivity {
 
     private InstaImagePlayerView mImagePlayerView;
 
-    private LifecycleRegistry mLifecycleRegistry;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stitch);
-
-        mLifecycleRegistry = new LifecycleRegistry((LifecycleOwner) this);
-        mLifecycleRegistry.markState(Lifecycle.State.CREATED);
-
         setTitle(R.string.stitch_toolbar_title);
         bindViews();
 
@@ -54,14 +43,9 @@ public class StitchActivity extends AppCompatActivity {
         showGenerateResult(false);
     }
 
-    @NotNull
-    public Lifecycle getArchLifecycle() {
-        return mLifecycleRegistry;
-    }
-
     private void bindViews() {
         mImagePlayerView = findViewById(R.id.player_image);
-        mImagePlayerView.setLifecycle(getArchLifecycle());
+        mImagePlayerView.setLifecycle(getLifecycle());
 
         RadioGroup rgStitchMode = findViewById(R.id.rg_stitch_mode);
         rgStitchMode.setOnCheckedChangeListener((group, checkedId) -> {
@@ -94,7 +78,6 @@ public class StitchActivity extends AppCompatActivity {
             mStitchTask.cancel(true);
         }
         mImagePlayerView.destroy();
-        mLifecycleRegistry.markState(Lifecycle.State.DESTROYED);
     }
 
     private static class StitchTask extends AsyncTask<Void, Void, Boolean> {
@@ -136,18 +119,6 @@ public class StitchActivity extends AppCompatActivity {
             }
             mDialog.dismiss();
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mLifecycleRegistry.markState(Lifecycle.State.RESUMED);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mLifecycleRegistry.markState(Lifecycle.State.STARTED);
     }
 
 }

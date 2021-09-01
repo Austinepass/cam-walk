@@ -1,8 +1,5 @@
 package com.orgustine.camapp.activity;
 
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.LifecycleRegistry;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -69,8 +66,6 @@ public class PlayAndExportActivity extends BaseObserveCameraActivity implements 
     private String mHDROutputPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/SDK_DEMO_OSC/generate_hdr_" + System.currentTimeMillis() + ".jpg";
     private boolean mIsStitchHDRSuccessful;
 
-    private LifecycleRegistry mLifecycleRegistry;
-
     public static void launchActivity(Context context, String[] urls) {
         Intent intent = new Intent(context, PlayAndExportActivity.class);
         intent.putExtra(WORK_URLS, urls);
@@ -81,10 +76,6 @@ public class PlayAndExportActivity extends BaseObserveCameraActivity implements 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_and_export);
-
-        mLifecycleRegistry = new LifecycleRegistry((LifecycleOwner) this);
-        mLifecycleRegistry.markState(Lifecycle.State.CREATED);
-
         setTitle(R.string.play_toolbar_title);
 
         String[] urls = getIntent().getStringArrayExtra(WORK_URLS);
@@ -141,11 +132,6 @@ public class PlayAndExportActivity extends BaseObserveCameraActivity implements 
             }
             showExportDialog();
         });
-    }
-
-    @NotNull
-    public Lifecycle getArchLifecycle() {
-        return mLifecycleRegistry;
     }
 
     private void bindViews() {
@@ -215,7 +201,7 @@ public class PlayAndExportActivity extends BaseObserveCameraActivity implements 
     private void playVideo(boolean isPlaneMode) {
         mGroupProgress.setVisibility(View.VISIBLE);
         mVideoPlayerView.setVisibility(View.VISIBLE);
-        mVideoPlayerView.setLifecycle(getArchLifecycle());
+        mVideoPlayerView.setLifecycle(getLifecycle());
         mVideoPlayerView.setPlayerViewListener(new PlayerViewListener() {
             @Override
             public void onLoadingStatusChanged(boolean isLoading) {
@@ -278,7 +264,7 @@ public class PlayAndExportActivity extends BaseObserveCameraActivity implements 
 
     private void playImage(boolean isPlaneMode) {
         mImagePlayerView.setVisibility(View.VISIBLE);
-        mImagePlayerView.setLifecycle(getArchLifecycle());
+        mImagePlayerView.setLifecycle(getLifecycle());
         mImagePlayerView.setPlayerViewListener(new PlayerViewListener() {
             @Override
             public void onLoadingStatusChanged(boolean isLoading) {
@@ -433,7 +419,6 @@ public class PlayAndExportActivity extends BaseObserveCameraActivity implements 
         if (mVideoPlayerView != null) {
             mVideoPlayerView.destroy();
         }
-        mLifecycleRegistry.markState(Lifecycle.State.DESTROYED);
     }
 
     private static class StitchTask extends AsyncTask<Void, Void, Void> {
@@ -477,18 +462,6 @@ public class PlayAndExportActivity extends BaseObserveCameraActivity implements 
             }
             mStitchDialog.dismiss();
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mLifecycleRegistry.markState(Lifecycle.State.RESUMED);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mLifecycleRegistry.markState(Lifecycle.State.STARTED);
     }
 
 }

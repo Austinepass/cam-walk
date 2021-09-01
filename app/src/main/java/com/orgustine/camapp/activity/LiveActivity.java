@@ -1,8 +1,5 @@
 package com.orgustine.camapp.activity;
 
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.LifecycleRegistry;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -56,16 +53,10 @@ public class LiveActivity extends BaseObserveCameraActivity implements IPreviewS
 
     private PreviewStreamResolution mCurrentResolution;
 
-    private LifecycleRegistry mLifecycleRegistry;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live);
-
-        mLifecycleRegistry = new LifecycleRegistry((LifecycleOwner) this);
-        mLifecycleRegistry.markState(Lifecycle.State.CREATED);
-
         setTitle(R.string.live_toolbar_title);
         bindViews();
         restoreLiveData();
@@ -81,14 +72,9 @@ public class LiveActivity extends BaseObserveCameraActivity implements IPreviewS
         }
     }
 
-    @NotNull
-    public Lifecycle getArchLifecycle() {
-        return mLifecycleRegistry;
-    }
-
     private void bindViews() {
         mCapturePlayerView = findViewById(R.id.player_capture);
-        mCapturePlayerView.setLifecycle(getArchLifecycle());
+        mCapturePlayerView.setLifecycle(getLifecycle());
 
         mEtRtmp = findViewById(R.id.et_rtmp);
         mEtWidth = findViewById(R.id.et_width);
@@ -341,21 +327,4 @@ public class LiveActivity extends BaseObserveCameraActivity implements IPreviewS
         mCbAudioEnabled.setChecked(sp.getBoolean("audio", true));
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mLifecycleRegistry.markState(Lifecycle.State.RESUMED);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mLifecycleRegistry.markState(Lifecycle.State.DESTROYED);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mLifecycleRegistry.markState(Lifecycle.State.STARTED);
-    }
 }

@@ -1,8 +1,5 @@
 package com.orgustine.camapp.activity;
 
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.LifecycleRegistry;
 import android.graphics.Bitmap;
 import android.graphics.ImageFormat;
 import android.graphics.PixelFormat;
@@ -47,16 +44,10 @@ public class Preview3Activity extends BaseObserveCameraActivity implements IPrev
     private HandlerThread mImageReaderHandlerThread;
     private Handler mImageReaderHandler;
 
-    private LifecycleRegistry mLifecycleRegistry;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preview3);
-
-        mLifecycleRegistry = new LifecycleRegistry((LifecycleOwner) this);
-        mLifecycleRegistry.markState(Lifecycle.State.CREATED);
-
         setTitle(R.string.preview3_toolbar_title);
         bindViews();
 
@@ -67,14 +58,9 @@ public class Preview3Activity extends BaseObserveCameraActivity implements IPrev
         });
     }
 
-    @NotNull
-    public Lifecycle getArchLifecycle() {
-        return mLifecycleRegistry;
-    }
-
     private void bindViews() {
         mCapturePlayerView = findViewById(R.id.player_capture);
-        mCapturePlayerView.setLifecycle(getArchLifecycle());
+        mCapturePlayerView.setLifecycle(getLifecycle());
 
         mBtnSwitch = findViewById(R.id.btn_switch);
         mBtnSwitch.setOnClickListener(v -> {
@@ -210,24 +196,6 @@ public class Preview3Activity extends BaseObserveCameraActivity implements IPrev
     public void onError() {
         // Preview Failed
         mBtnSwitch.setChecked(false);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mLifecycleRegistry.markState(Lifecycle.State.RESUMED);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mLifecycleRegistry.markState(Lifecycle.State.DESTROYED);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mLifecycleRegistry.markState(Lifecycle.State.STARTED);
     }
 
 }

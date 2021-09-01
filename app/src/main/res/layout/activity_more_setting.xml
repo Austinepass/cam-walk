@@ -30,7 +30,7 @@
             android:text="@string/setting_select_fun_mode"
             android:textSize="16sp" />
 
-        <com.arashivision.sdk.demo.view.FlowRadioGroup
+        <com.orgustine.camapp.view.FlowRadioGroup
             android:id="@+id/rg_function_mode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -95,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/setting_fun_mode_timeshift" />
-        </com.arashivision.sdk.demo.view.FlowRadioGroup>
+        </com.orgustine.camapp.view.FlowRadioGroup>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -145,7 +145,7 @@
                 android:text="@string/setting_exposure_mode"
                 android:textSize="16sp" />
 
-            <com.arashivision.sdk.demo.view.FlowRadioGroup
+            <com.orgustine.camapp.view.FlowRadioGroup
                 android:id="@+id/rg_exposure_mode"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -175,7 +175,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/setting_exposure_mode_manual" />
-            </com.arashivision.sdk.demo.view.FlowRadioGroup>
+            </com.orgustine.camapp.view.FlowRadioGroup>
 
             <Button
                 android:id="@+id/btn_set_exposure_mode"
@@ -251,7 +251,7 @@
                 android:text="@string/setting_shutter_mode"
                 android:textSize="16sp" />
 
-            <com.arashivision.sdk.demo.view.FlowRadioGroup
+            <com.orgustine.camapp.view.FlowRadioGroup
                 android:id="@+id/rg_shutter_mode"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -275,7 +275,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/setting_shutter_mode_faster" />
-            </com.arashivision.sdk.demo.view.FlowRadioGroup>
+            </com.orgustine.camapp.view.FlowRadioGroup>
 
             <Button
                 android:id="@+id/btn_set_shutter_mode"
@@ -324,7 +324,7 @@
                 android:text="@string/setting_wb"
                 android:textSize="16sp" />
 
-            <com.arashivision.sdk.demo.view.FlowRadioGroup
+            <com.orgustine.camapp.view.FlowRadioGroup
                 android:id="@+id/rg_wb"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -363,7 +363,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/setting_wb_7500k" />
-            </com.arashivision.sdk.demo.view.FlowRadioGroup>
+            </com.orgustine.camapp.view.FlowRadioGroup>
 
             <Button
                 android:id="@+id/btn_set_wb"

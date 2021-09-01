@@ -9,8 +9,8 @@ import android.net.NetworkRequest;
 import android.os.Build;
 import android.widget.Toast;
 
-import com.arashivision.sdk.demo.MyApp;
-import com.arashivision.sdk.demo.R;
+import com.orgustine.camapp.MyApp;
+import com.orgustine.camapp.R;
 import com.arashivision.sdkcamera.camera.InstaCameraManager;
 
 public class NetworkManager {
